@@ -1,5 +1,5 @@
 {
-    "name": "backend-project-budgeting-app",
+    "name": "summer-intern-hackathon",
     "version": "1.0.0",
     "description": "",
     "main": "app.js",
@@ -9,15 +9,15 @@
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/naomipate/backend-project-budgeting-app.git"
+      "url": "git+https://github.com/naomipate/summer-intern-hackathon.git"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "bugs": {
-      "url": "https://github.com/naomipate/backend-project-budgeting-app/issues"
+      "url": "https://github.com/naomipate/summer-intern-hackathon/issues"
     },
-    "homepage": "https://github.com/naomipate/backend-project-budgeting-app#readme",
+    "homepage": "https://github.com/naomipate/summer-intern-hackathon#readme",
     "dependencies": {
       "cors": "^2.8.5",
       "dotenv": "^16.3.1",
