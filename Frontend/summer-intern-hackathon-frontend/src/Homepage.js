@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Homepage.css';
 
 function Homepage() {
     const [name, setName] = useState("Jane");
     const [checkingBalance, setCheckingBalance] = useState(1000);
     const [savingsBalance, setSavingsBalance] = useState(1500);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('put api url here');
+                const data = await response.json();
+                //do something with the data
+            } catch (error) {
+                console.error('Error: ', error)
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleDeposit = () => {
         //navigation
