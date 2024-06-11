@@ -31,9 +31,11 @@ function Homepage() {
     }
 
     const handleTransfer = () => {
+        navigate('/transfer', { state: { accountType: selectedAccount} });
+        
         //navigation
     }
-    
+
 
 
     return (

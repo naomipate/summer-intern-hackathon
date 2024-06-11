@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import './TransferPage.css';
+import {useNavigate, useLocation } from 'react-router-dom';
 
 function TransferPage() {
     const [account, setAccount] = useState('Checking');
     const [amount, setAmount] = useState(0);
+    const navigate = useNavigate();
 
     const handleAccountChange = (e) => {
         setAccount(e.target.value);
@@ -18,7 +20,12 @@ function TransferPage() {
     };
 
 
-    const handleDeposit = () => {
+    const handleTransfer = () => {
+        // Function to update balance
+        // if (updateBalance) {
+        //     updateBalance(+amount);
+        // }
+        navigate('/');
 
     };
 
@@ -46,8 +53,8 @@ function TransferPage() {
                 />
             </div>
             <div>
-                <button onClick={handleDeposit}>Confirm</button>
-                <button onClick={handleCancel}>Cancel</button>
+            <button onClick={handleTransfer}>Confirm</button>
+                <button onClick={() =>navigate('/')}>Cancel</button>
             </div>
         </div>
     );
