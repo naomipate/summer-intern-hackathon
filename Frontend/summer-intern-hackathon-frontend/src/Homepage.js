@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Homepage.css';
 import { useNavigate } from 'react-router-dom';
 function Homepage() {
@@ -7,6 +7,19 @@ function Homepage() {
     const [savingsBalance, setSavingsBalance] = useState(1500);
     const [selectedAccount, setSelectedAccount] = useState('checking'); // Default to checking account
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await fetch('put api url here');
+                const data = await response.json();
+                //do something with the data
+            } catch (error) {
+                console.error('Error: ', error)
+            }
+        };
+        fetchData();
+    }, []);
 
     const handleDeposit = () => {
         navigate('/deposit', { state: { accountType: selectedAccount}});
