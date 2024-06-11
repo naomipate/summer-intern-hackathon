@@ -5,6 +5,8 @@ const DepositPage = () => {
     const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
     const location = useLocation();
+    const [selectedAccount, setSelectedAccount] = useState('checking'); // Default to checking account
+
     const { accountType, updateBalance } = location.state || {};
 
     const handleAmountChange = (e) => {
@@ -19,7 +21,7 @@ const DepositPage = () => {
     const handleDeposit = () => {
         //function of bank account/homepage
         if (updateBalance) {
-            updateBalance(amount);
+            updateBalance(+amount);
         }
         navigate('/');
     };
@@ -27,6 +29,15 @@ const DepositPage = () => {
     return (
         <div>
             <h1>Make a Deposit</h1>
+            <div>
+                <label>
+                    Select Account:
+                    <select value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
+                        <option value="checking">Checking</option>
+                        <option value="savings">Savings</option>
+                    </select>
+                </label>
+            </div>
             <div>
                 <label>
                     Amount:
@@ -37,6 +48,7 @@ const DepositPage = () => {
                         placeholder="0.00"
                     />
                 </label>
+                
             </div>
             <div>
                 <button onClick={handleDeposit}>Confirm</button>

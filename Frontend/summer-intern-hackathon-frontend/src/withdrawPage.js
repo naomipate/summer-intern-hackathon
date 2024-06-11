@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import {useNavigate, useLocation } from 'react-router-dom';
 
 const WithdrawPage = () => {
     const [amount, setAmount] = useState(0);
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
+    const [selectedAccount, setSelectedAccount] = useState('checking'); // Default to checking account
     const { accountType, updateBalance } = location.state || {};
 
     const handleAmountChange = (e) => {
@@ -20,12 +21,21 @@ const WithdrawPage = () => {
         if (updateBalance) {
             updateBalance(-amount); // Withdrawal is a negative amount
         }
-        history.push('/');
+        navigate('/');
     };
 
     return (
         <div>
             <h1>Make a Withdrawal</h1>
+            <div>
+                <label>
+                    Select Account:
+                    <select value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
+                        <option value="checking">Checking</option>
+                        <option value="savings">Savings</option>
+                    </select>
+                </label>
+            </div>
             <div>
                 <label>
                     Amount:
@@ -39,7 +49,7 @@ const WithdrawPage = () => {
             </div>
             <div>
                 <button onClick={handleWithdraw}>Confirm</button>
-                <button onClick={() => history.push('/')}>Cancel</button>
+                <button onClick={() =>navigate('/')}>Cancel</button>
             </div>
         </div>
     );
