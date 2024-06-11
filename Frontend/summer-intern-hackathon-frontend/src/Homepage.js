@@ -1,22 +1,27 @@
 import { useState } from 'react';
 import './Homepage.css';
-
+import { useNavigate } from 'react-router-dom';
 function Homepage() {
     const [name, setName] = useState("Jane");
     const [checkingBalance, setCheckingBalance] = useState(1000);
     const [savingsBalance, setSavingsBalance] = useState(1500);
+    const [selectedAccount, setSelectedAccount] = useState('checking'); // Default to checking account
+    const navigate = useNavigate();
 
     const handleDeposit = () => {
-        //navigation
+        navigate('/deposit', { state: { accountType: selectedAccount}});
+
     }
 
     const handleWithdraw = () => {
-        //navigation
+        navigate('/withdraw', { state: { accountType: selectedAccount} });
     }
 
     const handleTransfer = () => {
         //navigation
     }
+    
+
 
     return (
         <div className='main-container'>
