@@ -34,27 +34,31 @@ function TransferPage() {
     };
 
     return (
-        <div className='transferpage-container'>
-            <h1>Make a Transfer</h1>
-            <div className='transferpage-content'>
-                <p>To:</p>
-                <select id='dropdown'
-                value={account}
-                onChange={handleAccountChange}>
-                    <option value='Checking'>Checking</option>
-                    <option value='Savings'>Savings</option>
-                </select>
-                <p>Amount:</p>
-                <input
-                    type="text"
-                    value={amount}
-                    onChange={handleAmountChange}
-                    placeholder="0.00"
-                />
-            </div>
-            <div>
-            <button onClick={handleTransfer}>Confirm</button>
-                <button onClick={() =>navigate('/')}>Cancel</button>
+        <div className='transferpage-background'>
+            <div className='transferpage-container'>
+                <h1>Make a Transfer</h1>
+                <div className='transferpage-content'>
+                    <p>To:&ensp;</p>
+                    <select id='dropdown'
+                    value={account}
+                    onChange={handleAccountChange}>
+                        <option value='Checking'>Checking</option>
+                        <option value='Savings'>Savings</option>
+                    </select>
+                </div>
+                <div className='transferpage-content'>
+                    <p>Amount:&ensp;$</p>
+                    <input
+                        type="text"
+                        value={amount}
+                        onChange={handleAmountChange}
+                        placeholder="0.00"
+                    />
+                </div>
+                <div className='transferpage-button'>
+                    <button onClick={handleTransfer}>Confirm</button>
+                    <button onClick={() =>navigate('/')}>Cancel</button>
+                </div>
             </div>
         </div>
     );
