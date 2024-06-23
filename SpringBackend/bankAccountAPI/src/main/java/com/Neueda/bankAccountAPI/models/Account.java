@@ -1,4 +1,4 @@
-package com.Neueda.bankAccountAPI.domain;
+package com.Neueda.bankAccountAPI.models;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.Column;
@@ -20,11 +20,10 @@ import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 @AllArgsConstructor
 @JsonInclude(NON_DEFAULT)
 @Table(name = "accounts")
+
 public class Account {
   @Id
-  @UuidGenerator
-  @Column(name = "accountId", unique = true, updatable = false)
-  private String accountId;
+  private String id;
   private String username;
   private String password;
   private String firstName;
