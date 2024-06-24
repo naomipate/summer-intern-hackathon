@@ -1,22 +1,19 @@
 package com.Neueda.bankAccountAPI.models;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.persistence.*;
 import lombok.*;
-
-import static com.fasterxml.jackson.annotation.JsonInclude.Include.NON_DEFAULT;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@JsonInclude(NON_DEFAULT)
 @Table(name = "accounts")
-
+@ToString
 public class Account {
+
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue(strategy= GenerationType.AUTO)
   private Long id;
   private String user_name;
   private String password;

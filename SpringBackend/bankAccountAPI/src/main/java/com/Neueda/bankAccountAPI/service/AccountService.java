@@ -23,48 +23,49 @@ public class AccountService {
     return accountRepository.findAll();
   }
 
-//// Displays the account the user selects
-//  public Optional<Account> getAccountById(Long id) {
-//    return accountRepository.findById(id);
-//  }
-//
-//// Creates new account
-//  public Account createAccount(Account account) {
-//    return accountRepository.save(account);
-//  }
+// Displays the account the user selects
+  public Optional<Account> getAccountById(Long id) {
+    return accountRepository.findById(id);
+  }
 
-//// Updates account username
-//  public String updateAccountUsername(String oldUsername, String newUsername, String password) {
-//    Account account = getAllAccounts(oldUsername);
-//    if (account.getPassword().equals(password)) account.setUsername(newUsername);
-//    return account.getUsername();
-//  }
-//
-//// Updates account password
-//  public String updateAccountPW(String username, String oldPassword, String newPassword) {
-//    Account account = getAllAccounts(username);
-//    if (account.getPassword().equals(oldPassword)) account.setPassword(newPassword);
-//    return "Thank you for updating your password";
-//  }
-//
-//// Updates account info
-//  public String updateAccountInfo(String username, String firstName, String lastName) {
-//    Account account = getAllAccounts(username);
-//    account.setFirstName(firstName);
-//    account.setLastName(lastName);
-//    return "Thank you for updating your name to "
-//        + account.getFirstName() + " " + account.getLastName()
-//        + ".";
-//  }
-//
-//// Deletes account
-//  public String deleteAccount(Account account) {
-//    long balance = account.getBalance();
-//    String message = "You must pay off your balance to close this account.";
-//    if (balance > 0.00) {
-//      message = "Your balance of $ " + balance + " will be sent to you.";
-//      accountRepository.delete(account);
-//    }
-//    return message;
-//  }
+// Creates new account
+  public Account createAccount(Account account) {
+
+    System.out.println(account);
+    return accountRepository.save(account);
+  }
+
+// Updates account balance
+  public Account updateAccountBalance(Long id, Double balance) {
+    Account account = accountRepository.findAccountById(id);
+    account.setBalance(balance);
+    return accountRepository.save(account);
+  }
+
+// Updates account info
+  public Account updateAccountInfo(Long id, String firstName, String lastName) {
+    Account account = accountRepository.findAccountById(id);
+    account.setFirst_name(firstName);
+    account.setLast_name(lastName);
+    return accountRepository.save(account);
+  }
+
+// Updates account username
+  public Account updateAccountUsername(Long id, String username) {
+    Account account = accountRepository.findAccountById(id);
+    account.setUser_name(username);
+    return accountRepository.save(account);
+  }
+
+// Updates account password
+  public Account updateAccountPW(Long id, String newPassword) {
+    Account account = accountRepository.findAccountById(id);
+    account.setPassword(newPassword);
+    return accountRepository.save(account);
+  }
+
+// Deletes account
+  public void deleteAccount(Long id) {
+    accountRepository.deleteById(id);
+  }
 }
