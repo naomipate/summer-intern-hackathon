@@ -1,43 +1,95 @@
 package com.Neueda.bankAccountAPI.controllers;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.Neueda.bankAccountAPI.repository.AccountRepository;
+import com.Neueda.bankAccountAPI.service.AccountService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.Neueda.bankAccountAPI.models.Account;
 
 import java.util.List;
 
 @RestController
+@Slf4j
+@RequestMapping("/accounts")
 public class AccountController {
-  @GetMapping("/accounts")
-  public List<Account> getAccounts(){
-    System.out.println("Trigger");
-    return null;
+
+  private final AccountService accountService;
+
+  @Autowired
+  public AccountController(AccountService accountService){
+    this.accountService = accountService;
   }
 
-  @GetMapping("/accounts/{id}")
-  public List<Account> getSelectedAccount(@PathVariable long id){
-    System.out.println("Trigger");
-    return null;
+  // route to retrieve all accounts
+  @GetMapping
+  public ResponseEntity<List<Account>> getAccounts(){
+    List<Account> accounts = accountService.getAllAccounts();
+    return new ResponseEntity<>(accounts, HttpStatus.OK);
   }
 
-  @PostMapping("/accounts")
-  public List<Account> createAccount(){
-    System.out.println("Trigger");
-    return null;
-  }
+//  // route to retrieve account by id
+//  @GetMapping("/{id}")
+//  public ResponseEntity<Account> getAccountById(@PathVariable Long id){
+//    return accountService.getAccountById(id).map(account -> new ResponseEntity<>(account, HttpStatus.OK))
+//        .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//  }
+//
+//  // route to create new account
+//  @PostMapping
+//  public ResponseEntity<Account> createAccount(@RequestBody Account account){
+//    Account savedAccount = accountService.createAccount(account);
+//    return new ResponseEntity<>(savedAccount, HttpStatus.CREATED);
+//  }
 
+//  // route to update account balance
+//  @PatchMapping("/{id}/balance")
+//  public ResponseEntity<Account> updateAccountBalance(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    return accountService.findById(id).map(account -> {
+//      account.setBalance(updatedAccount.getBalance());
+//      Account savedAccount = accountService.save(account);
+//      return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//    }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//  }
+//
+//  // routes to update account info
+//  @PatchMapping("/{id}/name")
+//  public ResponseEntity<Account> updateFirstAndLastName(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    return accountService.findById(id).map(account -> {
+//      account.setFirstName(updatedAccount.getFirstName());
+//      account.setLastName(updatedAccount.getLastName());
+//      Account savedAccount = accountService.save(account);
+//      return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//    }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//  }
+//
+//  @PatchMapping("/{id}/username")
+//  public ResponseEntity<Account> updateUserName(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    return accountService.findById(id).map(account -> {
+//      account.setUsername(updatedAccount.getUsername());
+//      Account savedAccount = accountService.save(account);
+//      return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//    }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//  }
+//
+//  @PatchMapping("/{id}/pass")
+//  public ResponseEntity<Account> updatePassword(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    return accountService.findById(id).map(account -> {
+//      account.setPassword(updatedAccount.getPassword());
+//      Account savedAccount = accountService.save(account);
+//      return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//    }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//  }
+//
+//  // route to delete account
+//  @DeleteMapping("/{id}")
+//  public ResponseEntity<Void> deleteAccount(@PathVariable Long id) {
+//    return accountService.findById(id).map(account -> {
+//      accountService.delete(account);
+//      return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+//    }).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
+//  }
 }
-
-//// retrieve all ✅
-///accounts
-//// retrieve selected ✅
-///accounts/1
-//// create one, passing in the body you created
-///accounts
-//// update, passing in the body of what you changed
-///accounts/1
-//// delete, sends a confirmation of the account deletion
-///accounts/1
