@@ -4,11 +4,17 @@ import {useNavigate, useLocation } from 'react-router-dom';
 
 function TransferPage() {
     const [account, setAccount] = useState('Checking');
+    const [receivingAccount, setReceivingAccount] = useState('Savings');
     const [amount, setAmount] = useState(0);
     const navigate = useNavigate();
 
     const handleAccountChange = (e) => {
         setAccount(e.target.value);
+        if (e.target.value === 'Checking'){
+            setReceivingAccount('Savings');
+        } else {
+            setReceivingAccount('Checking');
+        }
     }
 
     const handleAmountChange = (e) => {
@@ -38,13 +44,16 @@ function TransferPage() {
             <div className='transferpage-container'>
                 <h1>Make a Transfer</h1>
                 <div className='transferpage-content'>
-                    <p>To:&ensp;</p>
+                    <p>From:&ensp;</p>
                     <select id='dropdown'
                     value={account}
                     onChange={handleAccountChange}>
                         <option value='Checking'>Checking</option>
                         <option value='Savings'>Savings</option>
                     </select>
+                </div>
+                <div className='transferpage-content'>
+                    <p>To:&ensp;{receivingAccount}</p>
                 </div>
                 <div className='transferpage-content'>
                     <p>Amount:&ensp;$</p>

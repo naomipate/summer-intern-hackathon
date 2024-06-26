@@ -25,32 +25,31 @@ const WithdrawPage = () => {
     };
 
     return (
-        <div>
-            <h1>Make a Withdrawal</h1>
-            <div>
-                <label>
-                    Select Account:
+        <div className='transferpage-background'>
+            <div className='transferpage-container'>
+                <h1>Make a Withdrawal</h1>
+                <div className='transferpage-content'>
+                    <p>Select Account:&ensp;</p>
                     <select value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
                         <option value="checking">Checking</option>
                         <option value="savings">Savings</option>
                     </select>
-                </label>
+                </div>
+                <div className='transferpage-content'>
+                    <p>Amount:&ensp;$</p>
+                        <input
+                            type="text"
+                            value={amount}
+                            onChange={handleAmountChange}
+                            placeholder="0.00"
+                        />
+                </div>
+                <div className='transferpage-button'>
+                    <button onClick={handleWithdraw}>Confirm</button>
+                    <button onClick={() =>navigate('/')}>Cancel</button>
+                </div>
             </div>
-            <div>
-                <label>
-                    Amount:
-                    <input
-                        type="text"
-                        value={amount}
-                        onChange={handleAmountChange}
-                        placeholder="0.00"
-                    />
-                </label>
-            </div>
-            <div>
-                <button onClick={handleWithdraw}>Confirm</button>
-                <button onClick={() =>navigate('/')}>Cancel</button>
-            </div>
+
         </div>
     );
 };

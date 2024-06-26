@@ -27,32 +27,29 @@ const DepositPage = () => {
     };
 
     return (
-        <div>
-            <h1>Make a Deposit</h1>
-            <div>
-                <label>
-                    Select Account:
+        <div className='transferpage-background'>
+            <div className='transferpage-container'>
+                <h1>Make a Deposit</h1>
+                <div className='transferpage-content'>
+                    <p>Select Account:&ensp;</p>
                     <select value={selectedAccount} onChange={(e) => setSelectedAccount(e.target.value)}>
                         <option value="checking">Checking</option>
                         <option value="savings">Savings</option>
                     </select>
-                </label>
-            </div>
-            <div>
-                <label>
-                    Amount:
+                </div>
+                <div className='transferpage-content'>
+                    <p>Amount:&ensp;$</p>
                     <input
                         type="text"
                         value={amount}
                         onChange={handleAmountChange}
                         placeholder="0.00"
                     />
-                </label>
-                
-            </div>
-            <div>
-                <button onClick={handleDeposit}>Confirm</button>
-                <button onClick={() => navigate('/')}>Cancel</button>
+                </div>
+                <div className='transferpage-button'>
+                    <button onClick={handleDeposit}>Confirm</button>
+                    <button onClick={() => navigate('/')}>Cancel</button>
+                </div>
             </div>
         </div>
     );
