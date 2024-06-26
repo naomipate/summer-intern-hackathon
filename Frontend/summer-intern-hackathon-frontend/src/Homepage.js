@@ -41,6 +41,8 @@ function Homepage() {
     return (
         <div className='main-container'>
             <h1>Welcome, {name}!</h1>
+            <p>Checking Balance: ${checkingBalance}</p>
+            <p>Savings Balance: ${savingsBalance}</p>
             <div className='balance-container'>
                 <div className='balance-background'>
                     <p>Checking Balance: ${checkingBalance}</p>
