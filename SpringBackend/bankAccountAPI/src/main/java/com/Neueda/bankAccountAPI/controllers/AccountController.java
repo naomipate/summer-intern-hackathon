@@ -1,6 +1,5 @@
 package com.Neueda.bankAccountAPI.controllers;
 
-import com.Neueda.bankAccountAPI.repository.AccountRepository;
 import com.Neueda.bankAccountAPI.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
