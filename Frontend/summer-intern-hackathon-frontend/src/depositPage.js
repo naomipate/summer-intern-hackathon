@@ -23,7 +23,7 @@ const DepositPage = () => {
         if (updateBalance) {
             updateBalance(+amount);
         }
-        navigate('/');
+        navigate('/home');
     };
 
     return (
@@ -48,7 +48,7 @@ const DepositPage = () => {
                 </div>
                 <div className='transferpage-button'>
                     <button onClick={handleDeposit}>Confirm</button>
-                    <button onClick={() => navigate('/')}>Cancel</button>
+                    <button onClick={() => navigate('/home')}>Cancel</button>
                 </div>
             </div>
         </div>
