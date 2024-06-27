@@ -21,7 +21,7 @@ const WithdrawPage = () => {
         if (updateBalance) {
             updateBalance(-amount); // Withdrawal is a negative amount
         }
-        navigate('/');
+        navigate('/home');
     };
 
     return (
@@ -46,7 +46,7 @@ const WithdrawPage = () => {
                 </div>
                 <div className='transferpage-button'>
                     <button onClick={handleWithdraw}>Confirm</button>
-                    <button onClick={() =>navigate('/')}>Cancel</button>
+                    <button onClick={() =>navigate('/home')}>Cancel</button>
                 </div>
             </div>
 

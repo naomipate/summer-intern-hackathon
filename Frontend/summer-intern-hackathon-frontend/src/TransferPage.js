@@ -31,7 +31,7 @@ function TransferPage() {
         // if (updateBalance) {
         //     updateBalance(+amount);
         // }
-        navigate('/');
+        navigate('/home');
 
     };
 
@@ -66,7 +66,7 @@ function TransferPage() {
                 </div>
                 <div className='transferpage-button'>
                     <button onClick={handleTransfer}>Confirm</button>
-                    <button onClick={() =>navigate('/')}>Cancel</button>
+                    <button onClick={() =>navigate('/home')}>Cancel</button>
                 </div>
             </div>
         </div>
