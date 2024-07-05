@@ -39,17 +39,32 @@ function Homepage() {
   };
 
   return (
-    <div className="main-container">
-      <h1>Welcome, {name}!</h1>
-      <p>Checking Balance: ${checkingBalance}</p>
-      <p>Savings Balance: ${savingsBalance}</p>
-      <div className="balance-container">
-        <div className="balance-background">
-          <p>Checking Balance: ${checkingBalance}</p>
+    <>
+      <div className="main-container">
+        <h1>Welcome, {name}!</h1>
+        <div className="balance-container">
+          <div className="balance-background">
+            <p>Checking Balance: ${checkingBalance}</p>
+          </div>
+          <div className="balance-background">
+            <p>Savings Balance: ${savingsBalance}</p>
+          </div>
         </div>
-        <div className="balance-background">
-          <p>Savings Balance: ${savingsBalance}</p>
+        <h2>What would you like to do today?</h2>
+        <div className="button-group">
+          <button className="button" onClick={handleDeposit}>
+            Deposit
+          </button>
+          <button className="button" onClick={handleWithdraw}>
+            Withdraw
+          </button>
+          <button className="button" onClick={handleTransfer}>
+            Transfer
+          </button>
         </div>
+      </div>
+      <div className="balance-background">
+        <p>Savings Balance: ${savingsBalance}</p>
       </div>
       <h2>What would you like to do today?</h2>
       <div className="button-group">
@@ -63,7 +78,7 @@ function Homepage() {
           Transfer
         </button>
       </div>
-    </div>
+    </>
   );
 }
 
