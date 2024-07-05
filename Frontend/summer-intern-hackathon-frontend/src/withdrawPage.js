@@ -15,21 +15,28 @@ const WithdrawPage = () => {
         }
     };
 
-    const handleWithdraw = () => {
+    const handleWithdraw = async () => {
         const id = localStorage.getItem('id');
         const updatedBalance = {
             amount: amount,
             balance_type: selectedAccount
         };
-        fetch(`http://localhost:8080/accounts/${id}/withdraw`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(updatedBalance)
-        })
-            .then(response => response.json())
-            .then(data => console.log(data));
+        try {
+            const response = await fetch(`http://localhost:8080/accounts/${id}/withdraw`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(updatedBalance)
+            });
+            if (!response.ok){
+                throw new Error(response.statusText);
+            }
+            const result = await response.json();
+            console.log(result);
+        } catch (error) {
+            console.error(error);
+        }
         navigate('/home');
     };
 
