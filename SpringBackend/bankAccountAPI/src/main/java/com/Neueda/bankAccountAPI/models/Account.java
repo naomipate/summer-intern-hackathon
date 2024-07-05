@@ -22,5 +22,5 @@ public class Account {
   private Double checking_balance;
   private String checking_type;
   private Double saving_balance;
-  private Double saving_type;
+  private String saving_type;
 }
