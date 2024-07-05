@@ -18,7 +18,6 @@ const WithdrawPage = () => {
     const handleWithdraw = () => {
         const id = localStorage.getItem('id');
         const updatedBalance = {
-            id: id,
             amount: amount,
             balance_type: selectedAccount
         };
@@ -28,7 +27,9 @@ const WithdrawPage = () => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(updatedBalance)
-        });
+        })
+            .then(response => response.json())
+            .then(data => console.log(data));
         navigate('/home');
     };
 
