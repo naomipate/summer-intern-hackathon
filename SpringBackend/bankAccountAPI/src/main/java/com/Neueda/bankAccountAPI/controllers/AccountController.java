@@ -2,6 +2,7 @@ package com.Neueda.bankAccountAPI.controllers;
 
 import com.Neueda.bankAccountAPI.service.AccountService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import com.Neueda.bankAccountAPI.models.Account;
 
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @Slf4j
 @RequestMapping("/accounts")
@@ -45,11 +47,30 @@ public class AccountController {
   }
 
   // route to update account balance
-  @PatchMapping("/{id}/balance")
-  public ResponseEntity<Account> updateAccountBalance(@PathVariable Long id, @RequestBody Account updatedAccount) {
-    Account savedAccount = accountService.updateAccountBalance(id, updatedAccount.getBalance());
-    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//  @PatchMapping("/{id}/balance")
+//  public ResponseEntity<Account> updateAccountBalance(@PathVariable Long id, @RequestBody Account account) {
+//    Account savedAccount = accountService.updateAccountBalance(id, account.getBalance());
+//    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//  }
 
+  // route to update account balance(deposit)
+  @PatchMapping("/{id}/deposit")
+  public ResponseEntity<Account> depositIntoAccountBalance(@PathVariable Long id, @RequestBody Double amount, @RequestBody String balance_type) {
+    Account savedAccount = accountService.depositIntoAccountBalance(id, amount, balance_type);
+    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+  }
+  // route to update account balance(withdraw)
+  @PatchMapping("/{id}/withdraw")
+  public ResponseEntity<Account> withdrawFromAccountBalance(@PathVariable Long id, @RequestBody Double amount, @RequestBody String balance_type) {
+    Account savedAccount = accountService.withdrawFromAccountBalance(id, amount, balance_type);
+    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+  }
+  // route to update account balance(deposit)
+  @PatchMapping("/{id}/transfer")
+  public ResponseEntity<Account> updateAccountBalancesTransfer(@PathVariable Long id, @RequestBody Double amount, @RequestBody String withdraw_type, @RequestBody String deposit_type) {
+    Account savedWithdrawnAccount = accountService.withdrawFromAccountBalance(id, amount, withdraw_type);
+    Account savedDepositedAccount = accountService.depositIntoAccountBalance(id, amount, deposit_type);
+    return new ResponseEntity<>(savedWithdrawnAccount, HttpStatus.OK);
   }
 
   // routes to update account info

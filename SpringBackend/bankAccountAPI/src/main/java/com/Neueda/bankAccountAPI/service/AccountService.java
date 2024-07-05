@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -35,10 +36,29 @@ public class AccountService {
     return accountRepository.save(account);
   }
 
-// Updates account balance
-  public Account updateAccountBalance(Long id, Double balance) {
+// withdraw from account balance
+  public Account withdrawFromAccountBalance(Long id, Double amount, String account_type) {
     Account account = accountRepository.findAccountById(id);
-    account.setBalance(balance);
+    String checking = "Checking";
+    String saving = "Saving";
+    if (Objects.equals(account_type, checking)) {
+      account.setChecking_balance(account.getChecking_balance() - amount);
+    } else if (Objects.equals(account_type, saving)) {
+      account.setSaving_balance(account.getSaving_balance() - amount);
+    }
+    return accountRepository.save(account);
+  }
+
+// deposit into account balance
+  public Account depositIntoAccountBalance(Long id, Double amount, String account_type) {
+    Account account = accountRepository.findAccountById(id);
+    String checking = "Checking";
+    String saving = "Saving";
+    if (Objects.equals(account_type, checking)) {
+      account.setChecking_balance(account.getChecking_balance() + amount);
+    } else if (Objects.equals(account_type, saving)) {
+      account.setSaving_balance(account.getSaving_balance() + amount);
+    }
     return accountRepository.save(account);
   }
 

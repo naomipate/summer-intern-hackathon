@@ -19,6 +19,8 @@ public class Account {
   private String password;
   private String first_name;
   private String last_name;
-  private Double balance;
-  private String account_type;
+  private Double checking_balance;
+  private String checking_type;
+  private Double saving_balance;
+  private Double saving_type;
 }
