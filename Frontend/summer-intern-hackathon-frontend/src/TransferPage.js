@@ -27,10 +27,20 @@ function TransferPage() {
 
 
     const handleTransfer = () => {
-        // Function to update balance
-        // if (updateBalance) {
-        //     updateBalance(+amount);
-        // }
+        const id = localStorage.getItem('id');
+        const updatedBalance = {
+            id: id,
+            amount: amount,
+            withdraw_type: account,
+            deposit_type: receivingAccount
+        };
+        fetch(`http://localhost:8080/accounts/${id}/withdraw`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedBalance)
+        });
         navigate('/home');
 
     };

@@ -7,8 +7,6 @@ const DepositPage = () => {
     const location = useLocation();
     const [selectedAccount, setSelectedAccount] = useState('checking'); // Default to checking account
 
-    const { accountType, updateBalance } = location.state || {};
-
     const handleAmountChange = (e) => {
         const value = e.target.value;
        
@@ -19,10 +17,19 @@ const DepositPage = () => {
 
 
     const handleDeposit = () => {
-        //function of bank account/homepage
-        if (updateBalance) {
-            updateBalance(+amount);
-        }
+        const id = localStorage.getItem('id');
+        const updatedBalance = {
+            id: id,
+            amount: amount,
+            balance_type: selectedAccount
+        };
+        fetch(`http://localhost:8080/accounts/${id}/deposit`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedBalance)
+        });
         navigate('/home');
     };
 
