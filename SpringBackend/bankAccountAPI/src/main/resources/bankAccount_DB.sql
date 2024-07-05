@@ -21,9 +21,9 @@ CREATE TABLE accounts (
 
 -- Inserting seed data into the accounts table
 INSERT INTO accounts (id, user_name, first_name, last_name, checking_balance, checking_type, saving_balance, saving_type) VALUES
-(100000000000000001, 'janedoe01', 'Jane', 'Doe', 8391.45,'Checking', 7853.34, 'Savings'),
-(100000000000000002, 'davids02', 'David', 'Smith', 4256.78, 'Checking', 3569.24, 'Savings'),
-(100000000000000003, 'sarahw03', 'Sarah', 'Wilson', 1234.56, 'Checking', 1234.56, 'Savings');
+(100000000001, 'janedoe01', 'Jane', 'Doe', 8391.45,'Checking', 7853.34, 'Savings'),
+(100000000002, 'davids02', 'David', 'Smith', 4256.78, 'Checking', 3569.24, 'Savings'),
+(100000000003, 'sarahw03', 'Sarah', 'Wilson', 1234.56, 'Checking', 1234.56, 'Savings');
 
 --DROP TABLE IF EXISTS transactions CASCADE;
 --CREATE TABLE transactions (

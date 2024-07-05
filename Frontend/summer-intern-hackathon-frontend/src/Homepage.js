@@ -12,11 +12,14 @@ function Homepage() {
     const fetchData = async () => {
       try {
         // edit fetch to include userid from login
-        const response = await fetch("http://localhost:8080/accounts/");
+        const id = localStorage.getItem("id");
+        const response = await fetch(`http://localhost:8080/accounts/${id}`);
         const data = await response.json();
         console.log(data);
-        console.log(data[0]);
         //do something with the data
+        setCheckingBalance(data.checking_balance);
+        setSavingsBalance(data.saving_balance);
+        setName(`${data.first_name} ${data.last_name}`);
       } catch (error) {
         console.error("Error: ", error);
       }

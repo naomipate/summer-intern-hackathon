@@ -12,11 +12,23 @@ const DepositPage = () => {
 
     if (/^\d*\.?\d{0,2}$/.test(value)) {
       setAmount(value);
+      console.log(amount);
     }
   };
 
   const handleDeposit = () => {
-    //function of bank account/homepage
+    const id = localStorage.getItem("id");
+    const updatedBalance = {
+      amount: amount,
+      balance_type: selectedAccount,
+    };
+    fetch(`http://localhost:8080/accounts/${id}/deposit`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedBalance),
+    });
     navigate("/home");
   };
 

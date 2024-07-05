@@ -62,27 +62,27 @@ public class AccountService {
     return accountRepository.save(account);
   }
 
-// Updates account info
-  public Account updateAccountInfo(Long id, String firstName, String lastName) {
-    Account account = accountRepository.findAccountById(id);
-    account.setFirst_name(firstName);
-    account.setLast_name(lastName);
-    return accountRepository.save(account);
-  }
-
-// Updates account username
-  public Account updateAccountUsername(Long id, String username) {
-    Account account = accountRepository.findAccountById(id);
-    account.setUser_name(username);
-    return accountRepository.save(account);
-  }
-
-// Updates account password
-  public Account updateAccountPW(Long id, String newPassword) {
-    Account account = accountRepository.findAccountById(id);
-    account.setPassword(newPassword);
-    return accountRepository.save(account);
-  }
+//// Updates account info
+//  public Account updateAccountInfo(Long id, String firstName, String lastName) {
+//    Account account = accountRepository.findAccountById(id);
+//    account.setFirst_name(firstName);
+//    account.setLast_name(lastName);
+//    return accountRepository.save(account);
+//  }
+//
+//// Updates account username
+//  public Account updateAccountUsername(Long id, String username) {
+//    Account account = accountRepository.findAccountById(id);
+//    account.setUser_name(username);
+//    return accountRepository.save(account);
+//  }
+//
+//// Updates account password
+//  public Account updateAccountPW(Long id, String newPassword) {
+//    Account account = accountRepository.findAccountById(id);
+//    account.setPassword(newPassword);
+//    return accountRepository.save(account);
+//  }
 
 // Deletes account
   public void deleteAccount(Long id) {

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import com.Neueda.bankAccountAPI.models.Account;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
@@ -54,15 +55,24 @@ public class AccountController {
 //  }
 
   // route to update account balance(deposit)
+//  @PatchMapping("/{id}/deposit")
+//  public ResponseEntity<Account> depositIntoAccountBalance(@PathVariable Long id, @RequestBody Double amount, @RequestBody String balance_type) {
+//    Account savedAccount = accountService.depositIntoAccountBalance(id, amount, balance_type);
+//    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//  }
   @PatchMapping("/{id}/deposit")
-  public ResponseEntity<Account> depositIntoAccountBalance(@PathVariable Long id, @RequestBody Double amount, @RequestBody String balance_type) {
-    Account savedAccount = accountService.depositIntoAccountBalance(id, amount, balance_type);
+  public ResponseEntity<Account> depositIntoAccountBalance(@PathVariable Long id, @RequestBody Map<String, Object> requestBody) {
+    Double amount = ((Number) requestBody.get("amount")).doubleValue();
+    String balanceType = (String) requestBody.get("balance_type");
+    Account savedAccount = accountService.depositIntoAccountBalance(id, amount, balanceType);
     return new ResponseEntity<>(savedAccount, HttpStatus.OK);
   }
   // route to update account balance(withdraw)
   @PatchMapping("/{id}/withdraw")
-  public ResponseEntity<Account> withdrawFromAccountBalance(@PathVariable Long id, @RequestBody Double amount, @RequestBody String balance_type) {
-    Account savedAccount = accountService.withdrawFromAccountBalance(id, amount, balance_type);
+  public ResponseEntity<Account> withdrawFromAccountBalance(@PathVariable Long id, @RequestBody Map<String, Object> requestBody) {
+    Double amount = ((Number) requestBody.get("amount")).doubleValue();
+    String balanceType = (String) requestBody.get("balance_type");
+    Account savedAccount = accountService.withdrawFromAccountBalance(id, amount, balanceType);
     return new ResponseEntity<>(savedAccount, HttpStatus.OK);
   }
   // route to update account balance(deposit)
@@ -73,24 +83,24 @@ public class AccountController {
     return new ResponseEntity<>(savedWithdrawnAccount, HttpStatus.OK);
   }
 
-  // routes to update account info
-  @PatchMapping("/{id}/name")
-  public ResponseEntity<Account> updateFirstAndLastName(@PathVariable Long id, @RequestBody Account updatedAccount) {
-    Account savedAccount = accountService.updateAccountInfo(id, updatedAccount.getFirst_name(), updatedAccount.getLast_name());
-    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
-  }
-
-  @PatchMapping("/{id}/username")
-  public ResponseEntity<Account> updatedAccountUsername(@PathVariable Long id, @RequestBody Account updatedAccount) {
-    Account savedAccount = accountService.updateAccountUsername(id, updatedAccount.getUser_name());
-    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
-  }
-
-  @PatchMapping("/{id}/pass")
-  public ResponseEntity<Account> updatePassword(@PathVariable Long id, @RequestBody Account updatedAccount) {
-    Account savedAccount = accountService.updateAccountPW(id, updatedAccount.getPassword());
-    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
-  }
+//  // routes to update account info
+//  @PatchMapping("/{id}/name")
+//  public ResponseEntity<Account> updateFirstAndLastName(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    Account savedAccount = accountService.updateAccountInfo(id, updatedAccount.getFirst_name(), updatedAccount.getLast_name());
+//    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//  }
+//
+//  @PatchMapping("/{id}/username")
+//  public ResponseEntity<Account> updatedAccountUsername(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    Account savedAccount = accountService.updateAccountUsername(id, updatedAccount.getUser_name());
+//    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//  }
+//
+//  @PatchMapping("/{id}/pass")
+//  public ResponseEntity<Account> updatePassword(@PathVariable Long id, @RequestBody Account updatedAccount) {
+//    Account savedAccount = accountService.updateAccountPW(id, updatedAccount.getPassword());
+//    return new ResponseEntity<>(savedAccount, HttpStatus.OK);
+//  }
 
   // route to delete account
   @DeleteMapping("/{id}")

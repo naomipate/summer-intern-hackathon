@@ -25,16 +25,14 @@ function Login() {
   }, []);
 
   const handleLogin = () => {
-    const id = 0;
+    let id = 0;
     //make sure the user exists in the database
-    /*
-        for(var i = 0; i < data.length; i++) {
-            if (data[i].user_name === username){
-                id = data[i].id;
-            }
-        }
-        console.log("id: ", data[i].id);
-        */
+    for (var i = 0; i < data.length; i++) {
+      if (data[i].user_name === username) {
+        id = data[i].id;
+      }
+    }
+    console.log("id: ", id);
     localStorage.setItem("id", id);
     // if user exist, navigate to home
     navigate("/home");
