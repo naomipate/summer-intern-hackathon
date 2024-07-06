@@ -4,7 +4,6 @@ import { useNavigate, useLocation } from "react-router-dom";
 const DepositPage = () => {
   const [amount, setAmount] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
   const [selectedAccount, setSelectedAccount] = useState("Checking"); // Default to checking account
 
   const handleAmountChange = (e) => {
@@ -12,23 +11,35 @@ const DepositPage = () => {
 
     if (/^\d*\.?\d{0,2}$/.test(value)) {
       setAmount(value);
-      console.log(amount);
     }
   };
 
-  const handleDeposit = () => {
+  const handleDeposit = async () => {
     const id = localStorage.getItem("id");
     const updatedBalance = {
-      amount: amount,
+      id: Number(id),
+      amount: Number(amount),
       balance_type: selectedAccount,
     };
-    fetch(`http://localhost:8080/accounts/${id}/deposit`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedBalance),
-    });
+    try {
+      const response = await fetch(
+        `http://localhost:8080/accounts/${id}/deposit`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedBalance),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
     navigate("/home");
   };
 
@@ -42,8 +53,8 @@ const DepositPage = () => {
             value={selectedAccount}
             onChange={(e) => setSelectedAccount(e.target.value)}
           >
-            <option value="checking">Checking</option>
-            <option value="savings">Savings</option>
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
           </select>
         </div>
         <div className="transferpage-content">

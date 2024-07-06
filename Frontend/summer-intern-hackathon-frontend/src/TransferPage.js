@@ -25,11 +25,32 @@ function TransferPage() {
     }
   };
 
-  const handleTransfer = () => {
-    // Function to update balance
-    // if (updateBalance) {
-    //     updateBalance(+amount);
-    // }
+  const handleTransfer = async () => {
+    const id = localStorage.getItem("id");
+    const updatedBalance = {
+      id: Number(id),
+      amount: Number(amount),
+      balance_type: account,
+    };
+    try {
+      const response = await fetch(
+        `http://localhost:8080/accounts/${id}/transfer`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedBalance),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
     navigate("/home");
   };
 

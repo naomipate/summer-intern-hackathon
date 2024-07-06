@@ -40,10 +40,10 @@ public class AccountService {
   public Account withdrawFromAccountBalance(Long id, Double amount, String account_type) {
     Account account = accountRepository.findAccountById(id);
     String checking = "Checking";
-    String saving = "Saving";
-    if (Objects.equals(account_type, checking)) {
+    String saving = "Savings";
+    if (account_type.equals(checking)) {
       account.setChecking_balance(account.getChecking_balance() - amount);
-    } else if (Objects.equals(account_type, saving)) {
+    } else if (account_type.equals(saving)) {
       account.setSaving_balance(account.getSaving_balance() - amount);
     }
     return accountRepository.save(account);
@@ -53,7 +53,7 @@ public class AccountService {
   public Account depositIntoAccountBalance(Long id, Double amount, String account_type) {
     Account account = accountRepository.findAccountById(id);
     String checking = "Checking";
-    String saving = "Saving";
+    String saving = "Savings";
     if (checking.equals(account_type)) {
       account.setChecking_balance(account.getChecking_balance() + amount);
     } else if (account_type.equals(saving)) {

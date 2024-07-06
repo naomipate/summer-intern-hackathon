@@ -77,10 +77,16 @@ public class AccountController {
   }
   // route to update account balance(deposit)
   @PatchMapping("/{id}/transfer")
-  public ResponseEntity<Account> updateAccountBalancesTransfer(@PathVariable Long id, @RequestBody Double amount, @RequestBody String withdraw_type, @RequestBody String deposit_type) {
-    Account savedWithdrawnAccount = accountService.withdrawFromAccountBalance(id, amount, withdraw_type);
-    Account savedDepositedAccount = accountService.depositIntoAccountBalance(id, amount, deposit_type);
-    return new ResponseEntity<>(savedWithdrawnAccount, HttpStatus.OK);
+  public ResponseEntity<Number> updateAccountBalancesTransfer(@PathVariable Long id, @RequestBody Map<String, Object> requestBody) {
+    Double amount = ((Number) requestBody.get("amount")).doubleValue();
+    String withdrawBalanceType = (String) requestBody.get("balance_type");
+    String depositBalanceType = "Savings";
+    if (withdrawBalanceType.equals("Savings")){
+      depositBalanceType = "Checking";
+    }
+    accountService.withdrawFromAccountBalance(id, amount, withdrawBalanceType);
+    accountService.depositIntoAccountBalance(id, amount, depositBalanceType);
+    return new ResponseEntity<>(amount, HttpStatus.OK);
   }
 
 //  // routes to update account info

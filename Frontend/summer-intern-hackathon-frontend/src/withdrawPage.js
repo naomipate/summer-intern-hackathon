@@ -1,12 +1,11 @@
-import React, { useState } from "react";
+import { type } from "@testing-library/user-event/dist/type";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const WithdrawPage = () => {
   const [amount, setAmount] = useState(0);
   const navigate = useNavigate();
-  const location = useLocation();
-  const [selectedAccount, setSelectedAccount] = useState("checking"); // Default to checking account
-  const { accountType, updateBalance } = location.state || {};
+  const [selectedAccount, setSelectedAccount] = useState("Checking"); // Default to checking account
 
   const handleAmountChange = (e) => {
     const value = e.target.value;
@@ -16,20 +15,32 @@ const WithdrawPage = () => {
     }
   };
 
-  const handleWithdraw = () => {
+  const handleWithdraw = async () => {
     const id = localStorage.getItem("id");
     const updatedBalance = {
-      id: id,
-      amount: amount,
+      id: Number(id),
+      amount: Number(amount),
       balance_type: selectedAccount,
     };
-    fetch(`http://localhost:8080/accounts/${id}/withdraw`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(updatedBalance),
-    });
+    try {
+      const response = await fetch(
+        `http://localhost:8080/accounts/${id}/withdraw`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedBalance),
+        }
+      );
+      if (!response.ok) {
+        throw new Error(response.statusText);
+      }
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
     navigate("/home");
   };
 
@@ -43,8 +54,8 @@ const WithdrawPage = () => {
             value={selectedAccount}
             onChange={(e) => setSelectedAccount(e.target.value)}
           >
-            <option value="checking">Checking</option>
-            <option value="savings">Savings</option>
+            <option value="Checking">Checking</option>
+            <option value="Savings">Savings</option>
           </select>
         </div>
         <div className="transferpage-content">

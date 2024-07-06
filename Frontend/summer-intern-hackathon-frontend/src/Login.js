@@ -13,8 +13,6 @@ function Login() {
         // edit fetch to include userid from login
         const response = await fetch("http://localhost:8080/accounts");
         const accounts = await response.json();
-        console.log(accounts);
-        console.log(accounts[0]);
         setData(accounts);
         //do something with the data
       } catch (error) {
@@ -32,7 +30,6 @@ function Login() {
         id = data[i].id;
       }
     }
-    console.log("id: ", id);
     localStorage.setItem("id", id);
     // if user exist, navigate to home
     navigate("/home");

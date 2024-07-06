@@ -15,7 +15,6 @@ function Homepage() {
         const id = localStorage.getItem("id");
         const response = await fetch(`http://localhost:8080/accounts/${id}`);
         const data = await response.json();
-        console.log(data);
         //do something with the data
         setCheckingBalance(data.checking_balance);
         setSavingsBalance(data.saving_balance);
@@ -47,10 +46,10 @@ function Homepage() {
         <h1>Welcome, {name}!</h1>
         <div className="balance-container">
           <div className="balance-background">
-            <p>Checking Balance: ${checkingBalance}</p>
+            <p>Checking Balance: ${checkingBalance.toFixed(2)}</p>
           </div>
           <div className="balance-background">
-            <p>Savings Balance: ${savingsBalance}</p>
+            <p>Savings Balance: ${savingsBalance.toFixed(2)}</p>
           </div>
         </div>
         <h2>What would you like to do today?</h2>
